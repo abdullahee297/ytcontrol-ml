@@ -35,12 +35,7 @@ fullscreen_state = False
 fullscreen_lock = False
 space_held = False
 
-# mute_state = False
-# thumb_status = False
-# index_status = False
-# middle_status = False
-# ring_status = False
-# pinky_status = False
+
 
 
 cap = cv2.VideoCapture(0)
