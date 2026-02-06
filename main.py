@@ -34,8 +34,7 @@ speed_lock = False
 fullscreen_state = False
 fullscreen_lock = False
 space_held = False
-
-
+state = ""
 
 
 cap = cv2.VideoCapture(0)
@@ -110,11 +109,11 @@ while True:
                 case 1:
                     if not mute_lock:
                         if not mute_state:
-                            print("Mute")
+                            state = "Mute"
                             pyautogui.press("m")
                             mute_state = True
                         else:
-                            print("Unmute")
+                            state = "Unmute"
                             pyautogui.press("m")
                             mute_state = False
                         mute_lock = True
@@ -123,11 +122,11 @@ while True:
                 case 2:
                     if not speed_lock:
                         if not speed_state:
-                            print("2x Speed ON")
+                            state = "2x Speed ON"
                             pyautogui.hotkey("shift", ">")
                             speed_state = True
                         else:
-                            print("Normal Speed")
+                            state = "Normal Speed"
                             pyautogui.hotkey("shift", "<")
                             speed_state = False
                         speed_lock = True
@@ -136,11 +135,11 @@ while True:
                 case 3:
                     if not fullscreen_lock:
                         if not fullscreen_state:
-                            print("Fullscreen ON")
+                            state = "Fullscreen ON"
                             pyautogui.press("f")
                             fullscreen_state = True
                         else:
-                            print("Fullscreen OFF")
+                            state = "Fullscreen OFF"
                             pyautogui.press("f")
                             fullscreen_state = False
                         fullscreen_lock = True
@@ -150,9 +149,16 @@ while True:
                     mute_lock = False
                     speed_lock = False
                     fullscreen_lock = False
-
-
-
+                    
+            cv2.putText(img,
+                        state,
+                        (10,200),
+                        cv2.FONT_HERSHEY_PLAIN,
+                        1,
+                        (255,0 ,0),
+                        2
+                    ) 
+    
     if pause_state:
             cv2.putText(img,
             "Pause",
