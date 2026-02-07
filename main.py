@@ -34,6 +34,8 @@ speed_lock = False
 fullscreen_state = False
 fullscreen_lock = False
 space_held = False
+loop_case = 0
+dloop_case = 0
 state = ""
 
 
@@ -122,12 +124,21 @@ while True:
                 case 2:
                     if not speed_lock:
                         if not speed_state:
+                            loop_case += 1
                             state = "2x Speed ON"
                             pyautogui.hotkey("shift", ">")
-                            speed_state = True
+                            print(loop_case)
+                            if loop_case == 4:
+                                speed_state = True
+                                loop_case = 0
+                            
                         else:
                             state = "Normal Speed"
+                            dloop_case += 1
                             pyautogui.hotkey("shift", "<")
+                            if loop_case == 4:
+                                speed_state = False
+                                dloop_case = 0
                             speed_state = False
                         speed_lock = True
 
@@ -152,10 +163,10 @@ while True:
                     
             cv2.putText(img,
                         state,
-                        (10,200),
+                        (10,140),
                         cv2.FONT_HERSHEY_PLAIN,
                         1,
-                        (255,0 ,0),
+                        (0,255 ,255),
                         2
                     ) 
     
